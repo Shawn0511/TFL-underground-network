@@ -10,23 +10,38 @@ library(stringr)
 library(ggplot2)
 library(tidygraph)
 library(ggraph)
+library(purrr)
+library(ggh4x)
 
-# Each years exist under Data/Raw/NUMBAT/
-numbat_root   <- here("Data","Raw","NUMBAT")
-year_folders  <- list.dirs(numbat_root, full.names = FALSE, recursive = FALSE)
-year_folders  <- year_folders[str_detect(year_folders, "^NUMBAT \\d{4}$")]
-years         <- year_folders %>% 
-  str_remove("^NUMBAT ") %>% 
-  as.integer()
 
-# Days of week for each year
-days <- c("TWT","MON","FRI","SAT","SUN")
+# Root NUMBAT folder
+numbat_root <- here("Data", "Raw", "NUMBAT")
+
+# Year folders and values
+year_folders <- list.dirs(numbat_root, full.names = FALSE, recursive = FALSE)
+year_folders <- year_folders[str_detect(year_folders, "^NUMBAT \\d{4}$")]
+years        <- year_folders %>% str_remove("^NUMBAT ") %>% as.integer()
+
+# Day labels & period levels
+DAYS     <- c("TWT","MON","FRI","SAT","SUN")
+PERIODS  <- c("total","early","am_peak","midday","pm_peak","evening","late")
+NOPERIOD <- PERIODS[PERIODS != "total"]
 
 # helper to build each Excel path
 make_nbt_path <- function(year, day) {
   year_folder <- paste("NUMBAT", year)
   file_name   <- sprintf("NBT%02d%s_outputs.xlsx", year %% 100, day)
-  here("Data", "Raw", "NUMBAT", year_folder, file_name)
+  here("Data","Raw","NUMBAT", year_folder, file_name)
+}
+
+# Resolve day of TWT and MTT (TWT -> MTT)
+resolve_day <- function(year, day) {
+  path <- make_nbt_path(year, day)
+  if (day == "TWT" && !file.exists(path)) {
+    alt_path <- make_nbt_path(year, "MTT")
+    if (file.exists(alt_path)) return("MTT")
+  }
+  return(day)
 }
 
 # TFL colour palette for each line
@@ -52,6 +67,17 @@ tube_line_colors <- c(
   `Waterloo & City`      = "#95CDBA"
 )
 
-# time-period ordering
-period_levels <- c("total","early","am_peak","midday","pm_peak","evening","late")
+# Pre-computed grids
+NOPERIOD <- PERIODS[PERIODS != "total"]
 
+FULL_DAY_GRID <- expand_grid(
+  line   = names(tube_line_colors),
+  period = NOPERIOD,
+  day    = DAYS
+)
+
+FULL_YEAR_GRID <- function(years) expand_grid(
+  year   = years,
+  line   = names(tube_line_colors),
+  period = NOPERIOD
+)
