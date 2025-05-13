@@ -5,12 +5,13 @@
 - [Exploratory Data Analysis (StationFootball)](#exploratory-data-analysis-for-network-demand-stationfootball-dataset)
 - [Annual Station Counts Analysis](#exploratory-data-analysis-for-annual-station-counts-pre-covid--post-covid-dataset)
 - [NUMBAT Dataset Analysis](#exploratory-data-analysis-for-numbat-datasets)
-- [NUMBAT Analysis Pipeline](#numbat-analysis-pipeline)
 - [Clustering & Modelling](#clustering--modelling-for-numbat-datasets-od-crowding-and-station-demand-patterns)
 - [Crowding Prediction Model](#crowding-prediction-model-using-xgboost)
 - [Limitations](#limitations)
 - [Future Research Suggestions](#future-research-suggestions)
 - [Conclusion](#conclusion)
+
+
 
 
 # TFL-underground-network
@@ -31,7 +32,7 @@ This repository analyses nine years of Transport for London (TFL) datasets to sh
 > The one-page reflective summary is included in `summary/01382316-math70076-assessment-2-summary.pdf`.
 
 
-### Exploratory Data Analysis for Network Demand Stationfootball dataset
+## Exploratory Data Analysis for Network Demand Stationfootball dataset
 
 The time series plot of daily total entry and exit tap counts across the entire network from 2019 to 2025 is shown below, It reflects that a sharp drop in demand occurs in early 2020, corresponding to the COVID-19 lockdowns. A gradual recovery is observed from late 2020 to 2023. For the period of Post-2022, the ridership level seems to plateau but does not yet fully reach pre-pandemic levels.
 
@@ -48,7 +49,7 @@ The yearly entry Tap-in trends below include each year from 2019 to 2025.
 
 
 
-### Exploratory Data Analysis for Annual Station Counts Pre-COVID & Post-COVID dataset
+## Exploratory Data Analysis for Annual Station Counts Pre-COVID & Post-COVID dataset
 
 **Top 20 Busiest Stations per Year (Pre-COVID & Post-COVID)**
 The two plots below show the top 20 stations by annual volume for each year. Each subplot ranks stations within the year, and the x-axis is fixed to help the comparison of passenger volumes.
@@ -139,7 +140,7 @@ Clustering indicates functional similarities among stations. It can be summarise
 ![image](https://github.com/user-attachments/assets/f80806de-b69c-4f9d-9b37-ac2b5d57646e)
 
 
-### Exploratory Data Analysis for NUMBAT datasets
+## Exploratory Data Analysis for NUMBAT datasets
 
 This study dissects nearly a decade of Transport for London data to answer two questions: **How has crowding on rail links evolved before, during and after COVID‑19?** and **Can we predict which origin–destination (OD) links will be critically crowded in the near‑term?**
 It used the **NUMBAT** (2016‑2023) dataset, which includes origin-destination (OD) link flows,  OD passenger volumes, station-level entries/exits, and train frequencies across multiple years for every Underground, Overground, DLR and Elizabeth Line link (2016–2023). The goal is to understand post-COVID ridership trends, detect overcrowded links, and compare them to the pre-COVID period. Additionally, it also tries to develop a crowding-alert model using XGBoost.
