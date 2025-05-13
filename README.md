@@ -72,7 +72,7 @@ The following plots show the total number of passengers entering and exiting the
   - Weekday volumes remain highest, and the difference between Friday and Saturday narrows.
   - Friday commuting has declined (hybrid work increased after COVID-19).
   - Weekend usage is stabilising (tourism or retail-driven).
-  - The post-COID period entry and exit volumes are still very balanced, which indicates no major system-level directional bias.
+  - The post-COVID period entry and exit volumes are still very balanced, which indicates no major system-level directional bias.
 ![image](https://github.com/user-attachments/assets/677c3529-59a9-4cd7-8c97-d8616245de0f)
 ![image](https://github.com/user-attachments/assets/f7a78777-abb2-43c2-8ef8-5e791846dc07)
 
@@ -168,7 +168,7 @@ tube_line_colors <- c(
   `Waterloo & City`      = "#95CDBA"
 )
 
-Due to the rich Dataset from 2016-2023 for BUMBAT, it is hard to investigate in detail. The plots below mostly focus on the recent year 2023, and subsequently, with some matrix plots across different years.
+Due to the rich Dataset from 2016-2023 for NUMBAT, it is hard to investigate in detail. The plots below mostly focus on the recent year 2023, and subsequently, with some matrix plots across different years.
 
 **Top 5 OD (origin–destination) Pairs per Time Period (2023)**
 This plot reflects  time-specific commuting patterns by OD pair:
