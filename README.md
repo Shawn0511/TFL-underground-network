@@ -155,14 +155,43 @@ tube_line_colors <- c(
   `Waterloo & City`      = "#95CDBA"
 )
 
-**K-means Clustering of Stations Based on Demand**
+Due to the rich Dataset from 2016-2023 for BUMBAT, it is hard to investigate in detail. The plots below mostly focus on the recent year 2023, and subsequently, with some matrix plots across different years.
+
+**Top 5 OD (Origin to Destination) Pairs per Time Period (2023)**
+
+![image](https://github.com/user-attachments/assets/aecba4f5-26a2-4097-abba-e72c5ac77d31)
+
+
+**Top 20 origin-destination (OD) pairs by total passenger volume (2023)**
+
+![image](https://github.com/user-attachments/assets/3fb52fc8-bd8d-42f8-8c15-ac41509cb738)
 
 
 
+**Top 20 most crowded OD links based on passengers per train (2023)**
+![image](https://github.com/user-attachments/assets/55551758-74f9-4553-86df-57ffbae8c1e6)
+
+
+**Top 20 stations with highest combined entries and exits (2023)**
+
+![image](https://github.com/user-attachments/assets/4cf6ccaf-0255-4ae5-9830-b931702cbe08)
 
 
 **Passenger Load by Line-period across days**
 
+The plots below summarise passenger load by line and period across day types in 2023 and across years (2016–2023).
+1. Passenger Load by Line & Period (2023 across Day Types)
+ - Weekdays: There is an obvious and classic AM peak and PM peak demand that persists. **Elizabeth, Central, Jubilee, and Victoria lines** dominate in both peak and off-peak flows. Friday demand is slightly lower than TWT/MON, likely due to hybrid work policies or early departures.
+ - Weekends: Demand shifts from peak-focused to midday-focused travel patterns. The midday period becomes the busiest, which suggests more leisure and discretionary travel. The **Elizabeth Line** continues to show strong usage, even on weekends (it reflects its multi-purpose appeal). Lines like **District, Jubilee, and DLR** also exhibit strong weekend presence, which is possibly due to serving tourist destinations.
+
+The day-type breakdown highlights the behavioural differences in ridership that are important for service planning. While weekday patterns are driven by work and school routines, weekends reflect recreational and non-commuting purposes, which require different scheduling and frequency strategies. And it is worth mentioning that the continued strength of the Elizabeth Line across all days reaffirms its role as a backbone line in the post-COVID transit network.
+
+2. Passenger Load by Line & Period (2016–2023) (only focus on weekday period)
+ - Pre-COVID Patterns (2016–2019): **Central, Northern, Jubilee, and Victoria lines** show the highest volumes, especially during peak periods. And the volume is fairly stable year-to-year, with minor seasonal or operational variations.
+ - Pandemic Impact (2020–2021): 2020 shows a dramatic collapse in volume across all lines and periods due to COVID-19. The **District, Jubilee, and Central lines** show the most visible drops, which are possibly due to their link with office-heavy zones.
+ - Post-COVID Recovery (2022–2023): It shows a gradual rebound in demand, especially on the Elizabeth Line (operated since 2022). The overall volumes remain lower than pre-COVID levels, though the structure of peak periods is recovering. And it noted that the Elizabeth Line became prominent by 2023, which indicates rapid uptake and importance in relieving overcrowding on older lines.
+
+This longitudinal plot clearly reveals the structural and behavioural impact of the COVID-19 pandemic on urban mobility. Importantly, the rise of the Elizabeth Line represents a shift in the network topology and commuting corridors (TfL, 2023b).
 
 
 ![image](https://github.com/user-attachments/assets/f27d2a98-cf4d-4fb3-9bfe-f1675050d048)
@@ -185,6 +214,8 @@ tube_line_colors <- c(
 ![Rplot05](https://github.com/user-attachments/assets/19cc70aa-62ca-456a-82ae-0640ee797091)
 ![Rplot06](https://github.com/user-attachments/assets/e4254dae-1d2c-44dd-85f7-9ee027c73006)
 ![Rplot07](https://github.com/user-attachments/assets/3c777845-81ef-4179-8242-6c5a671cf9d3)
+![Rplot08](https://github.com/user-attachments/assets/a6659f5d-5291-401e-bc47-609383ac3a2a)
+![Rplot09](https://github.com/user-attachments/assets/cd9befc5-2856-4d4f-85a5-6ec81f5cc061)
 
 
 
