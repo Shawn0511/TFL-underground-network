@@ -94,6 +94,37 @@ The following scatter plots compare total weekday volume vs weekend volume for e
 
 
 
+**Total Volume by Transport Mode**
+
+LU (London Underground) dominates both periods, accounting for the majority of the total passenger volume. LO (London Overground) is the second most used mode in both time periods, and DLR consistently follows LO as third. TFL Rail appears as a distinct mode but is replaced by EZL (Elizabeth Line).
+
+There is a clear drop in total volume across all modes in 2021–2023 compared to 2017–2019, which reflects the lingering impact of the COVID-19 pandemic. The emergence of EZL (Elizabeth Line) post-2022 shows how the system evolved structurally, with new services contributing to the recovery. The emergence and expansion of the Elizabeth Line post-2022 illustrate how network planning and infrastructure investment have played an important role. The operation of the Elizabeth Line not only introduces new capacity but also helps alleviate congestion on previously overcrowded lines, such as the Central and Jubilee lines.
+
+![image](https://github.com/user-attachments/assets/34235372-16f3-434c-80e0-13404921e806)
+![image](https://github.com/user-attachments/assets/8f5f5ec9-0aaa-4e87-89c9-bdac972c5140)
+
+**K-means Clustering of Stations Based on Demand**
+
+Additionally, it also investigated K-means clustering of stations based on demand for the pre- and post-COVID period. Stations are grouped into 3 clusters based on tap-in and tap-out demand across entry/exit days, the principal component (PC1) explains most of the variance in both periods (>97%). The three clusters are designed as below:
+- Cluster 1 (red): It typically contains high-demand, high-variability stations, like Stratford, Victoria LU, Paddington TfL, Waterloo LU.
+- Cluster 3 (blue): It represents a large group of low-demand or stable-demand stations.
+- Cluster 2 (green): It covers a moderate or mixed group, sometimes including central or interchange stations like Bank, Liverpool Street, London Bridge.
+
+When comparing pre- (2017–2019) and post-COVID period (2021–2023), it can be summarised into two main conclusions:
+1. The post-COVID period shows a more compact spread
+  - Reduced variability across stations.
+  - Possibly more homogenised travel behaviour due to the obvious conversion of working mode (remote work or other behavioural shifts).
+2. Some stations shifted between clusters, which indicates changes in their functional role:
+  - Leicester Square and Moorgate show relative repositioning, which is possibly due to changes in tourism or commuting patterns, it also possibly due to the operation of the Elizabeth Line
+  - Stratford station remained an outlier in both periods, which confirms its role as a key interchange hub.
+
+Clustering indicates functional similarities among stations. It can be summarised that the post-pandemic recovery appears uneven, with some stations bouncing back strongly while others remain subdued. These analyses and insights are valuable for resource allocation.
+
+![image](https://github.com/user-attachments/assets/8fb5ce3b-8911-47f4-8870-2606d24a2732)
+![image](https://github.com/user-attachments/assets/f80806de-b69c-4f9d-9b37-ac2b5d57646e)
+
+
+
 
 
 
