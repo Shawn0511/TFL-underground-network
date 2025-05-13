@@ -259,19 +259,120 @@ Overall, the most critical OD flows across all periods are: Oxford Circus → Wa
 
 
 
+## Clustering & Modelling for NUMBAT datasets: OD Crowding and Station Demand Patterns
+
+To better understand and manage overcrowding on the London Underground, it applied analysis of unsupervised clustering and supervised machine learning techniques (XGBOOST) to the NUMBAT dataset. It aimed to uncover structure in station-level and OD-level demand patterns, identify key sources of crowding in the post-COVID period, and develop predictive models to anticipate future congestion risks.
+
+It first conducted K-means clustering on the top 75% most crowded origin-destination (OD) pairs using total passenger volume and passengers per train as features. It helps to classify OD pairs into distinct groups that share similar usage and capacity strain characteristics. It also used hierarchical clustering to group stations based on their entry profiles across time of day, which reveals common temporal usage patterns (e.g., strong commuting peaks, steady off-peak flow etc).
+
+
+Based on these insights and previous EDA, it can developed an XGBoost-based binary classifier to predict which OD links are likely to experience crowding in the future. The model was trained on a variety of engineered features that capture both temporal and structural changes between pre-COVID (2019 MTT) and post-COVID (2023 TWT) conditions, which include percentage change in demand, previous load factors, and total passenger counts.
+
+The clustering reveals where and when structural crowding patterns emerge, while the XGBoost model provides a scalable tool for real-time crowding alerts and proactive capacity planning.
+
+##  Clustering OD Pairs by Crowding (K-means, k=3)
+
+The following scatter plot applies k-means clustering (k=3) on the top 75% of OD pairs ranked by crowding (passengers per train), which used scaled features for 'total_passengers' and 'passengers_per_train'. The goal is to identify natural groupings in high-demand segments and detect patterns in travel intensity and overcrowding.
+
+The three clusters are:
+
+  - Cluster 1 (red): High total demand with moderate crowding. These OD pairs (e.g. Oxford Circus → Warren Street) are the critical central segments, which typically with balanced operations but intense usage.
+  - Cluster 2 (green): OD pairs with high crowding (high passengers per train), despite they does not having the highest total flows. Often indicates short trips (e.g. Farringdon → Liverpool Street LU).
+  - Cluster 3 (blue): Lower-demand, lower-crowding pairs, which represent either less central routes or well-serviced ones with sufficient capacity.
+
+
+![image](https://github.com/user-attachments/assets/d86526e5-f07d-4e3d-a9d4-6572617e25b8)
+
+
+##  Hierarchical Clustering of Stations by Time-of-Day Profiles
+
+It used hourly entry profiles (station × time_bin) here, and it performed hierarchical clustering to group stations with similar temporal patterns. The dendrogram reveals the natural hierarchical structure, while the second line chart summarises average profiles for each cluster.
+
+The four clusters used here are:
+
+- Cluster 4 (purple): Obvious dual-peak (AM & PM peak), high entry volumes. Typical of major commuter hubs (e.g. Oxford Circus, Waterloo LU).
+- Cluster 3 (blue): Moderate peak alignment, flatter midday activity. It is likely mixed-use or interchange stations.
+- Cluster 2 (green): Mild peaks and higher baseline throughout, which could reflect residential or peripheral stations.
+- Cluster 1 (red): Low activity throughout the day, which is likely low-traffic stations.
+
+
+![Rplot10](https://github.com/user-attachments/assets/8f85fb14-b00f-4372-91ac-d121df153882)
+![image](https://github.com/user-attachments/assets/962efd9f-7b72-4e13-9161-66d5c82e3dd7)
 
 
 
+##  Crowding Prediction Model Using XGBoost
+
+To proactively predict crowding risk on OD links based on changing travel patterns between pre- and post-COVID periods. 
+Target: Binary indicator of overcrowded links based on the top 10% load factor percentile.
+
+It constructed a labelled dataset using the 'make_link_delta()' function between pre- and post-COVID NUMBAT datasets for weekdays.
+It defined the target variable as a binary indicator of high load factor (>90th percentile).
+
+Trained using OD-level features: percentage change in demand ('pct_delta'), load factor (pre/post), total passengers, and line encoded numerically.
+
+Model Training
+  - Used XGBoost (binary:logistic) with stratified 80/20 train-test split.
+  - Performed 5-fold cross-validation with early stopping for tuning.
+  - After hyperparameter tuning, the best hyperparameters are used:
+      - 'eta = 0.1', 'max_depth = 5'
+      - 'nrounds = 44'
+      - AUC on held-out set: 0.9864
+
+Evaluation:
+    **Best CV AUC: 0.9901**
+
+The SHAP Analysis (Shapley values) indicated that the 'total_passengers_2' and 'load_factor_1' and 'pct_delta' are the top drivers of crowding.
+The ROC Curve showed near-perfect separation between crowded and non-crowded links. And the calibration Plot confirmed that predicted probabilities closely matched actual crowding risk.
+
+Use Case
+This model  can serve as a crowding alert tool, which can enable proactive monitoring and control. It can be deployed to predict where passenger demand is outstripping supply.
+
+![image](https://github.com/user-attachments/assets/e00bbe5e-2fdc-4830-9784-ef18e93d0679)
+![image](https://github.com/user-attachments/assets/c67b747b-fb4f-48b8-b832-a09e2f79f701)
 
 
+In summary, clustering can enhance understanding of station typologies and temporal rhythms, while the crowding model can offer a forecasting tool to preemptively address passenger congestion.
+
+##  Limitations
+Despite the depth of analysis, there are a few notable limitations:
+
+  - Data Scope limitation: 
+Due to the time limitation, it did not investigate the NUMBAT dataset across different years and periods (MON, FRI, SAT, SUN). The analysis relied solely on train frequency data and some of the NUMBAT dataset. It is worth spending more time to process the whole dataset and include some external covariates, such as weather, special events, and station accessibility.
+
+  - Model Scope & Diversity:
+While XGBoost performed well for binary crowding classification, it is worth trying other models such as logistic regression, random forest, or neural networks, etc. Further benchmarking across models could provide more robustness and interpretability trade-offs.
+
+  - Passenger Demographics and Purpose:
+This analysis assumed demand homogeneity across time and space. In reality, trip purpose segmentation (commute, leisure, tourism) could reveal deeper behavioural drivers, especially when comparing weekday to weekend clusters.
+
+  - Transfer Behaviour:
+Although tap-in/tap-out data is rich, multi-leg journeys (transfers across lines or stations) are not captured explicitly, which may understate complex passenger movement through key interchanges like Oxford Circus or King’s Cross.
+
+##  Future research suggestions
+
+  - Passenger Flow Simulation & Forecasting:
+Develop network-based simulation models or graph neural networks to simulate how shocks (e.g., service disruptions or strikes) ripple through the network, and it is also worth predicting future ridership under various policy or infrastructure scenarios.
+
+  - Further Development of Real-time Crowding Alerts:
+With the predictive model in place, this research could be extended into a real-time application for passenger information systems or station control rooms, which could enable dynamic crowd management.
+
+  - Simulation and Network Resilience:
+It can use OD network graphs to simulate rerouting during service disruptions. It can also model the resilience of the Underground system under different shock scenarios.
 
 
+##  Conclusion
 
+This project provides a data-driven exploration of passenger flow patterns and crowding dynamics within the London Underground network from 2016 to 2023. By integrating multiple Transport for London datasets(including annual station entries/exits and detailed NUMBAT OD flow records), the study offers a comprehensive view of how ridership behaviour has evolved, particularly before and after the COVID-19 pandemic.
 
+The project reveals critical insights:
 
+  - Exploratory analyses show persistent structural changes in demand, with lingering post-COVID volume suppression and altered weekday/weekend patterns.
 
+  - Network visualisations, such as chord diagrams and OD bar charts, uncover high-pressure links and validate the growing centrality of the Elizabeth Line.
 
+  - Unsupervised clustering techniques (e.g. K-means and hierarchical clustering) effectively identify spatial and temporal usage patterns, which enhance the understanding of station typologies and peak dynamics.
 
+  - A high-performance XGBoost-based crowding alert model was developed, which achieved an AUC of 0.9864 and demonstrates strong potential for forecasting congestion risks based on past travel and load conditions.
 
-
-
+Overall, the study can combine descriptive insights and predictive modelling to help have smarter crowd management, operational planning across the TfL network. While some limitations remain, the modular framework built here offers a scalable foundation for real-time applications in urban mobility forecasting. It also helps to build a  solid foundation for further comprehensive research.
