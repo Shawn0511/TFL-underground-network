@@ -45,8 +45,8 @@ Key results include:
 ## Data Sources
 
 The data can be found and downloaded from the TFL website:
-https://tfl.gov.uk/info-for/open-data-users/our-open-data#on-this-page-9
-https://crowding.data.tfl.gov.uk/
+[tfl_open data](https://tfl.gov.uk/info-for/open-data-users/) and
+[tfl_crowding.data](https://crowding.data.tfl.gov.uk/).
 
 The downloaded data can also be found here:
 - **NUMBAT dataset** (2016–2023): Link-level passenger volumes, station entries/exits, train frequency
@@ -139,8 +139,8 @@ See code: [`05-model.R`](05-model.R)
 
 ---
 
-## Suggested Next Steps (Details are included in 'Summary_report.md')
-
+## Suggested Next Steps
+[Details are included in:](Summary_report.md)
 Future development could include:
 - Real-time crowding alerts  
 - Network resilience simulation  
@@ -151,6 +151,6 @@ Future development could include:
 ## License
 
 This project is released under the MIT License. (See 'LICENSE')
-For data access and reuse, consult TfL's [open data license](https://tfl.gov.uk/info-for/open-data-users/) and [open data license](https://crowding.data.tfl.gov.uk/).
+For data access and reuse, consult TfL's [open data license](https://tfl.gov.uk/info-for/open-data-users/) and [crowding.data](https://crowding.data.tfl.gov.uk/).
 
 
