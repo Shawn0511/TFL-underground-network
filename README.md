@@ -124,6 +124,72 @@ Clustering indicates functional similarities among stations. It can be summarise
 ![image](https://github.com/user-attachments/assets/f80806de-b69c-4f9d-9b37-ac2b5d57646e)
 
 
+### Exploratory Data Analysis for NUMBAT datasets
+
+This study dissects nearly a decade of Transport for London data to answer two questions: **How has crowding on rail links evolved before, during and after COVID‑19?** and **Can we predict which origin–destination (OD) links will be critically crowded in the near‑term?**
+
+**NUMBAT tap‑in / tap‑out outputs** (2016‑2023) supply OD passenger volumes and train frequencies for every Underground, Overground, DLR and Elizabeth Line link.
+A modular R pipeline loads, cleans and standardises all sheets, applies TFL colour‑coding, and computes derived metrics such as passengers‑per‑train and station flow. EDA layers summarise the “shape” of demand by line, period, day and year; tidygraph & ggraph power chord diagrams of the busiest links.
+
+The colour code for each line aligns with the actual as below:
+# TFL colour palette for each line
+tube_line_colors <- c(
+  Bakerloo               = "#B36305",
+  Central                = "#E32017",
+  DLR                    = "#00AFAD",
+  District               = "#00782A",
+  `Elizabeth Line`       = "#6950A1",
+  `H&C and Circle`       = "#F3A9BB",
+  Jubilee                = "#A0A5A9",
+  `LO East London`       = "#EE7C0E",
+  `LO Gospel Oak-Barking`= "#EE7C0E",
+  `LO North London`      = "#EE7C0E",
+  `LO Romford–Upminster` = "#EE7C0E",
+  `LO Watford-Euston`    = "#EE7C0E",
+  `LO West Anglia`       = "#EE7C0E",
+  `London Trams`         = "#84B817",
+  Metropolitan           = "#9B0056",
+  Northern               = "#000000",
+  Piccadilly             = "#003688",
+  Victoria               = "#0098D4",
+  `Waterloo & City`      = "#95CDBA"
+)
+
+**K-means Clustering of Stations Based on Demand**
+
+
+
+
+
+**Passenger Load by Line-period across days**
+
+
+
+![image](https://github.com/user-attachments/assets/f27d2a98-cf4d-4fb3-9bfe-f1675050d048)
+![image](https://github.com/user-attachments/assets/f193dfdb-735a-4d1a-8e21-196223e35e02)
+
+
+
+
+
+
+
+
+
+**Network visualisation: Chord network diagrams**
+
+
+
+
+![image](https://github.com/user-attachments/assets/cf88036d-27a6-4f8a-a65d-80c3934d0b8d)
+![image](https://github.com/user-attachments/assets/51ff4800-9dc4-46b5-b704-b2b7038f4664)
+
+
+
+
+
+
+
 
 
 
