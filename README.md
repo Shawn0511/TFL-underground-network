@@ -127,12 +127,25 @@ Clustering indicates functional similarities among stations. It can be summarise
 ### Exploratory Data Analysis for NUMBAT datasets
 
 This study dissects nearly a decade of Transport for London data to answer two questions: **How has crowding on rail links evolved before, during and after COVID‑19?** and **Can we predict which origin–destination (OD) links will be critically crowded in the near‑term?**
-
-**NUMBAT tap‑in / tap‑out outputs** (2016‑2023) supply OD passenger volumes and train frequencies for every Underground, Overground, DLR and Elizabeth Line link.
+It used the **NUMBAT** (2016‑2023) dataset, which includes origin-destination (OD) link flows,  OD passenger volumes, station-level entries/exits, and train frequencies across multiple years for every Underground, Overground, DLR and Elizabeth Line link (2016–2023). The goal is to understand post-COVID ridership trends, detect overcrowded links, and compare them to the pre-COVID period. Additionally, it also tries to develop a crowding-alert model using XGBoost.
 A modular R pipeline loads, cleans and standardises all sheets, applies TFL colour‑coding, and computes derived metrics such as passengers‑per‑train and station flow. EDA layers summarise the “shape” of demand by line, period, day and year; tidygraph & ggraph power chord diagrams of the busiest links.
 
-The colour code for each line aligns with the actual as below:
-# TFL colour palette for each line
+## NUMBAT Analysis Pipeline
+
+The NUMBAT analysis pipeline separates scripts by functionality:
+
+| Script         | Purpose                                                                              |
+|----------------|--------------------------------------------------------------------------------------|
+| `00-config.R`  | Centralises all global constants (paths, days, line colours, etc.)                   |
+| `01-load.R`    | Manages loading of raw Excel files and helper function                               |
+| `02-process.R` | Processes and reshapes data; write helper function for later use                     |
+| `03-eda.R`     | Contains visualisation functions for exploratory analysis (EDA)                      |
+| `04-network.R` | Contains network and graph-based plotting functions (Chord network diagrams)         |
+| `05-model.R`   | Implements clustering analysis and develops a crowding-alert model using XGBoost     |
+| `Main.R`       | Sources all modular scripts and runs the full workflow                               |
+
+
+# TFL colour palette for each line (The colour code for each line aligns with the actual)
 tube_line_colors <- c(
   Bakerloo               = "#B36305",
   Central                = "#E32017",
@@ -157,15 +170,26 @@ tube_line_colors <- c(
 
 Due to the rich Dataset from 2016-2023 for BUMBAT, it is hard to investigate in detail. The plots below mostly focus on the recent year 2023, and subsequently, with some matrix plots across different years.
 
-**Top 5 OD (Origin to Destination) Pairs per Time Period (2023)**
+**Top 5 OD (origin–destination) Pairs per Time Period (2023)**
+This plot reflects  time-specific commuting patterns by OD pair:
+  - Early: Predominantly East London pairs (e.g., Forest Gate → Maryland), possibly capturing early shifts and some dispersed patterns.
+  - AM Peak: Strong north-south flow (e.g., Euston → Warren Street), which indicates the commuter influx to central and office zones.
+  - Midday: Repeats some peak OD pairs, implying off-peak retention of flow along the same corridors (Euston ↔ Warren).
+  - Evening/Late: Possible leisure-oriented flows emerge (e.g., Gloucester Road → Earl's Court), showing more dispersed patterns.
 
 ![image](https://github.com/user-attachments/assets/aecba4f5-26a2-4097-abba-e72c5ac77d31)
 
 
 **Top 20 origin-destination (OD) pairs by total passenger volume (2023)**
 
-![image](https://github.com/user-attachments/assets/3fb52fc8-bd8d-42f8-8c15-ac41509cb738)
+The bar plot below highlights the most heavily trafficked OD pairs across the network.
+  - The top OD pairs (e.g., Whitechapel ↔ Liverpool Street LU, Liverpool Street ↔ Farringdon) primarily lie on the Elizabeth Line and Central London interchanges.
+  - Many connections involve adjacent or closely spaced stations, which suggests high intra-zone mobility. This is possibly due to intermodal transfers or short commutes.
+  - Bidirectional travel between some key nodes (e.g., Warren Street ↔ Oxford Circus, Euston ↔ Warren Street) shows symmetric high flow, which reinforces these stations are key interchange corridors.
 
+Such OD analysis supports targeted crowd management, especially along the Elizabeth and Victoria line spines.
+
+![image](https://github.com/user-attachments/assets/3fb52fc8-bd8d-42f8-8c15-ac41509cb738)
 
 
 **Top 20 most crowded OD links based on passengers per train (2023)**
@@ -200,7 +224,12 @@ This longitudinal plot clearly reveals the structural and behavioural impact of 
 
 
 
+**Compare total passenger demand by Tube line across different years**
 
+The following chart tracks the total annual flow per line, which shows the evolution of usage intensity. It can be observed that the **Northern, Central, Jubilee, and Victoria lines** dominate consistently. The launch of the **Elizabeth Line** shows rapid ascent, which overtakes several legacy lines by 2023.
+
+
+![image](https://github.com/user-attachments/assets/0a7a42c1-381e-4369-bc26-e953cbf8a6dc)
 
 
 
@@ -208,14 +237,30 @@ This longitudinal plot clearly reveals the structural and behavioural impact of 
 **Network visualisation: Chord network diagrams**
 
 
+  - Chord Diagram – EARLY
+Flow is heavily radial, with inbound motion toward central London (e.g., King’s Cross, Oxford Circus). Early Elizabeth Line usage indicates demand from outer London commuters starting work early.
 
+  - Chord Diagram – AM PEAK
+Dense flows cluster along Victoria, Elizabeth, and Central lines, which reflect typical white-collar commuting corridors into Zone 1.
 
-![total](https://github.com/user-attachments/assets/67436c4b-7038-48e9-9a0f-faee291aefa6)
+  - Chord Diagram – MIDDAY
+Flow becomes more dispersed, the tourist and discretionary travel become significant. This volume shift supports TfL's strategic midday service boost to mitigate crowding (TfL, 2022).
+
+  - Chord Diagram – PM PEAK
+Return flows become dominant. Strong Eastbound and Northbound outbound OD flows suggest residential dispersal.
+
+  - Chord Diagram – LATE
+The flows are fewer than in other periods and more localised. This suggests local nightlife, leisure, or late-shift commuters. In addition, the operation windows have also been reduced.
+
+  - Chord Diagram – TOTAL
+Overall, the most critical OD flows across all periods are: Oxford Circus → Warren Street, Whitechapel → Liverpool Street, King’s Cross → Euston. These arcs appear in nearly all time-period diagrams, which suggests persistent all-day demand. It validates them as high-priority corridors for capacity planning and crowd control measures.
+
 ![Rplot05](https://github.com/user-attachments/assets/19cc70aa-62ca-456a-82ae-0640ee797091)
 ![Rplot06](https://github.com/user-attachments/assets/e4254dae-1d2c-44dd-85f7-9ee027c73006)
 ![Rplot07](https://github.com/user-attachments/assets/3c777845-81ef-4179-8242-6c5a671cf9d3)
 ![Rplot08](https://github.com/user-attachments/assets/a6659f5d-5291-401e-bc47-609383ac3a2a)
 ![Rplot09](https://github.com/user-attachments/assets/cd9befc5-2856-4d4f-85a5-6ec81f5cc061)
+![total](https://github.com/user-attachments/assets/67436c4b-7038-48e9-9a0f-faee291aefa6)
 
 
 
