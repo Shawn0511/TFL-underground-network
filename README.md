@@ -35,13 +35,14 @@ The yearly entry Tap-in trends below include each year from 2019 to 2025.
 
 ### Exploratory Data Analysis for Annual Station Counts Pre-COVID & Post-COVID dataset
 
+**Top 20 Busiest Stations per Year (Pre-COVID & Post-COVID)**
 The two plots below show the top 20 stations by annual volume for each year. Each subplot ranks stations within the year, and the x-axis is fixed to help the comparison of passenger volumes.
 - 2017–2019: The top stations are consistently King’s Cross St. Pancras, Oxford Circus, Victoria, Waterloo, and Liverpool Street. The ordering remains stable, which reflects established commuter hubs in Central London.
 - 2021–2023: While the same core stations dominate, Tottenham Court Road, Farringdon, and Brixton LU begin to rise in rank, which likely reflects shifts in travel demand and recovery patterns.
 - Post-COVID changes: Firstly, the impact of the Elizabeth Line opening is visible in rising ranks for Farringdon and Tottenham Court Road. It is noted that the central section of the Elizabeth line from Paddington to Abbey Wood opened to passengers on 24 May 2022, which connects regions to the east and west of London through the central area and the London Docklands. Secondly, the overall volumes increase from 2021 to 2023, showing recovery from the pandemic since the lockdown.
 
 ![image](https://github.com/user-attachments/assets/eadb56a3-f618-479e-b3f4-a7475ed294dd)
-![image](https://github.com/user-attachments/assets/db1aaf30-92d3-4176-82a4-601e3b9337cf)
+![image](https://github.com/user-attachments/assets/d1e04e07-0d87-4034-aff2-37365ce74cf0)
 
 **Annual Passenger Volume Distribution by Year**
 The histograms below show the distribution of station annual volumes for each year. It can be observed that:
@@ -49,14 +50,47 @@ The histograms below show the distribution of station annual volumes for each ye
 - 2021–2023: The distribution flattens in 2021 due to suppressed demand and lockdown, but gradually recovers in 2022–2023. However, it still shows that there is right-skewness in 2021, which indicates fewer stations with high footfall. Such an issue of heavier tails on the lower end and slightly shifted left, which reflects reduced demand and the uneven pace of recovery across stations.
 - These plots highlight how COVID-19 disrupted the volume distribution, creating more heterogeneity and dampened peaks that recover gradually. It can be concluded that 2021–2023 demand remains lower and more dispersed compared to pre-COVID, with slower recovery for some stations.
 
+![image](https://github.com/user-attachments/assets/5432d336-be1e-4491-9bdf-96a5d6dd1f9b)
+![image](https://github.com/user-attachments/assets/6f31a888-1d52-4ec9-a227-1b36cb915bec)
+
+**Top 10 Tap-in/Out Imbalance Stations**
+The Net Tap-in vs Tap-out imbalance bar plot below visualises stations with the largest net imbalance between tap-ins (entries) and tap-outs (exits). Imbalances  can help identify stations that serve predominantly as entry-only or exit-only hubs, which reveal commuter nodes, residential areas, or tourist hotspots. Oxford Circus, Green Park, and Covent Garden show large negative imbalances (more exits), which suggests that these are destination stations for work, shopping, and tourism. Stations like London Bridge, Bank and Monument, and Finsbury Park exhibit positive imbalance (more entries), which reflects that these stations have a strong commuter base or transfer hub behaviour.
+And it is noticed that there are some new addition stations like Seven Sisters and Walthamstow Central, suggesting suburban stations gained relative importance. It is possible that this reflects changes in work-from-home patterns and reduced reliance on Central London hubs for post-COVID period.
+
+![image](https://github.com/user-attachments/assets/5ce7f91c-9123-4570-b85a-1a8eb1c2b398)
+![image](https://github.com/user-attachments/assets/a788364c-4355-4fe6-880f-c6403c658a35)
+
+**Network-wide Daily Demand**
+
+The following plots show the total number of passengers entering and exiting the system across different day types (Mon–Thu, Friday, Saturday, Sunday).
+- Pre-COVID (2017–2019):
+  - Mon–Thu is the busiest, consistent with traditional workweek commuting.
+  - Friday is slightly lower, suggesting early leave trends or hybrid working.
+  - Saturday matches or exceeds Friday in some years (strong leisure travel).
+  - Sunday is the lowest, which is as expected.
+- Post-COVID (2021–2023):
+  - Weekday volumes remain highest, and the difference between Friday and Saturday narrows.
+  - Friday commuting has declined (hybrid work increased after COVID-19).
+  - Weekend usage is stabilising (tourism or retail-driven).
+  - The post-COID period entry and exit volumes are still very balanced, which indicates no major system-level directional bias.
+![image](https://github.com/user-attachments/assets/677c3529-59a9-4cd7-8c97-d8616245de0f)
+![image](https://github.com/user-attachments/assets/f7a78777-abb2-43c2-8ef8-5e791846dc07)
 
 
+**Weekday vs Weekend Passenger Volume (Scatter Plot)**
 
+The following scatter plots compare total weekday volume vs weekend volume for each station. It provides insight into station-level demand symmetry and it can have conclusions as below:
+- Pre-COVID (2017–2019):
+  - Strong positive correlation between weekday and weekend usage.
+  - Major stations like King’s Cross, Oxford Circus, and Victoria are the highest in both dimensions.
+  - Most stations cluster close to the origin, which reflects low overall traffic, while central hubs are far outliers.
 
+- Post-COVID (2021–2023):
+  - The correlation remains as pre-COVID, but several top stations (e.g., King’s Cross, Waterloo) appear disproportionately high on weekends, which suggests tourism and leisure have regained traction faster.
+  - Stratford is a key interchange and retail hub, which rises in the post-COVID plot, aligning with the growing importance of multi-modal stations.
 
-
-
-
+![image](https://github.com/user-attachments/assets/c405db53-05a0-4747-9d8f-67406780fdd4)
+![image](https://github.com/user-attachments/assets/7621374d-dfd5-44d0-8844-8f81bec36f21)
 
 
 
