@@ -217,25 +217,20 @@ The day-type breakdown highlights the behavioural differences in ridership that 
 
 This longitudinal plot clearly reveals the structural and behavioural impact of the COVID-19 pandemic on urban mobility. Importantly, the rise of the Elizabeth Line represents a shift in the network topology and commuting corridors (TfL, 2023b).
 
-
 ![image](https://github.com/user-attachments/assets/f27d2a98-cf4d-4fb3-9bfe-f1675050d048)
 ![image](https://github.com/user-attachments/assets/f193dfdb-735a-4d1a-8e21-196223e35e02)
-
-
 
 
 **Compare total passenger demand by Tube line across different years**
 
 The following chart tracks the total annual flow per line, which shows the evolution of usage intensity. It can be observed that the **Northern, Central, Jubilee, and Victoria lines** dominate consistently. The launch of the **Elizabeth Line** shows rapid ascent, which overtakes several legacy lines by 2023.
 
-
 ![image](https://github.com/user-attachments/assets/0a7a42c1-381e-4369-bc26-e953cbf8a6dc)
-
-
 
 
 **Network visualisation: Chord network diagrams**
 
+The chord diagrams were constructed using R, based on the NUMBAT OD flow dataset, which provides origin–destination (OD) passenger counts between stations across various time periods.
 
   - Chord Diagram – EARLY
 Flow is heavily radial, with inbound motion toward central London (e.g., King’s Cross, Oxford Circus). Early Elizabeth Line usage indicates demand from outer London commuters starting work early.
