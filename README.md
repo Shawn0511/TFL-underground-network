@@ -40,7 +40,7 @@ The two plots below show the top 20 stations by annual volume for each year. Eac
 - 2021–2023: While the same core stations dominate, Tottenham Court Road, Farringdon, and Brixton LU begin to rise in rank, which likely reflects shifts in travel demand and recovery patterns.
 - Post-COVID changes: Firstly, the impact of the Elizabeth Line opening is visible in rising ranks for Farringdon and Tottenham Court Road. It is noted that the central section of the Elizabeth line from Paddington to Abbey Wood opened to passengers on 24 May 2022, which connects regions to the east and west of London through the central area and the London Docklands. Secondly, the overall volumes increase from 2021 to 2023, showing recovery from the pandemic since the lockdown.
 
-![image](https://github.com/user-attachments/assets/34550193-0c7f-4de9-8333-bb1ba1a86142)
+![image](https://github.com/user-attachments/assets/eadb56a3-f618-479e-b3f4-a7475ed294dd)
 ![image](https://github.com/user-attachments/assets/db1aaf30-92d3-4176-82a4-601e3b9337cf)
 
 **Annual Passenger Volume Distribution by Year**
