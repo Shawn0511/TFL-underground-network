@@ -63,10 +63,10 @@ Scripts assume a local `Data/Raw/NUMBAT/` folder structure or can use the librar
 
 ---
 
-## Tube map each year and train seat information
+## Additional Resources (Tube map and train seat information)
 
-Tube_map/
-Train_seat_capacity/
+- Tube maps: `Tube_map/`
+- Train seat capacity data: `Train_seat_capacity/`
 
 ---
 
@@ -150,7 +150,7 @@ Future development could include:
 
 ## License
 
-This project is released under the MIT License. (See 'LICENSE')
+This project is released under the MIT License. (See [LICENSE](LICENSE.txt))
 For data access and reuse, consult TfL's [open data license](https://tfl.gov.uk/info-for/open-data-users/) and [crowding.data](https://crowding.data.tfl.gov.uk/).
 
 
