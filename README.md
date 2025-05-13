@@ -181,8 +181,10 @@ tube_line_colors <- c(
 
 
 
-![image](https://github.com/user-attachments/assets/cf88036d-27a6-4f8a-a65d-80c3934d0b8d)
-![image](https://github.com/user-attachments/assets/51ff4800-9dc4-46b5-b704-b2b7038f4664)
+![total](https://github.com/user-attachments/assets/67436c4b-7038-48e9-9a0f-faee291aefa6)
+![Rplot05](https://github.com/user-attachments/assets/19cc70aa-62ca-456a-82ae-0640ee797091)
+![Rplot06](https://github.com/user-attachments/assets/e4254dae-1d2c-44dd-85f7-9ee027c73006)
+![Rplot07](https://github.com/user-attachments/assets/3c777845-81ef-4179-8242-6c5a671cf9d3)
 
 
 
