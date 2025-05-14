@@ -395,6 +395,7 @@ Overall, the study can combine descriptive insights and predictive modelling to 
 
 
 ## Reference
+
 Transport for London (TfL). (2023). Travel in London Report 15. Retrieved from: https://content.tfl.gov.uk/travel-in-london-report-15.pdf
 
 Transport for London (TfL) Open Data Portal: https://tfl.gov.uk/info-for/open-data-users/
@@ -402,4 +403,5 @@ Transport for London (TfL) Open Data Portal: https://tfl.gov.uk/info-for/open-da
 Chen, T., & Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 785–794).
 
 Pawluk De-Toledo, K., O’Hern, S., & Koppel, S. (2024). “I saw a fox in Melbourne CBD”: Urban travel behaviour changes during COVID-19 and beyond. Transportation Research Part F: Traffic Psychology and Behaviour, 100, 115–132.
+
 

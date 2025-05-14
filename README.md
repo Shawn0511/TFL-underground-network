@@ -63,10 +63,11 @@ Scripts assume a local `Data/Raw/NUMBAT/` folder structure or can use the librar
 
 ---
 
-## Tube map each year and train seat information
 
-Tube_map/
-Train_seat_capacity/
+## Additional Resources (Tube map and train seat information)
+
+- Tube maps: `Tube_map/`
+- Train seat capacity data: `Train_seat_capacity/`
 
 ---
 
