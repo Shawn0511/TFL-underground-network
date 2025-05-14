@@ -1,10 +1,11 @@
-# Exploratory plots
+# Exploratory Data Analysis plots
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(ggh4x)
 library(RColorBrewer)
 
+# Bar chart: Top 20 origin-destination (OD) pairs by total passenger volume
 plot_top20_od <- function(df) {
   df %>% arrange(desc(total_passengers)) %>% slice_head(n = 20) %>%
     ggplot(aes(x = reorder(paste(from_station, "→", to_station), total_passengers),
@@ -14,6 +15,7 @@ plot_top20_od <- function(df) {
          x = "OD Pair", y = "Total Passengers") + theme_minimal()
 }
 
+# Bar chart: Top 20 most crowded OD links based on passengers per train
 plot_top20_crowded <- function(df) {
   df %>% arrange(desc(passengers_per_train)) %>% slice_head(n = 20) %>%
     ggplot(aes(x = reorder(paste(from_station, "→", to_station), passengers_per_train),
@@ -23,6 +25,7 @@ plot_top20_crowded <- function(df) {
          x = "OD Pair", y = "Passengers per Train") + theme_minimal()
 }
 
+# Bar chart: Top 20 stations with highest combined entries and exits
 plot_station_flow <- function(df) {
   df %>% arrange(desc(total_flow)) %>% slice_head(n = 20) %>%
     ggplot(aes(x = reorder(station, total_flow), y = total_flow)) +
@@ -31,6 +34,7 @@ plot_station_flow <- function(df) {
          x = "Station", y = "Entries + Exits") + theme_minimal()
 }
 
+# Scatter plot: Total trains vs total passengers on each OD link
 plot_scatter_trains_vs_passengers <- function(df) {
   ggplot(df, aes(x = total_trains, y = total_passengers)) +
     geom_point(alpha = 0.5) +
@@ -38,6 +42,7 @@ plot_scatter_trains_vs_passengers <- function(df) {
          x = "Total Trains", y = "Total Passengers") + theme_minimal()
 }
 
+# Histogram: Passengers per train across all OD links
 plot_hist_ppt <- function(df) {
   ggplot(df, aes(x = passengers_per_train)) +
     geom_histogram(bins = 50, fill = "orange", color = "white") +
@@ -45,6 +50,7 @@ plot_hist_ppt <- function(df) {
          x = "Passengers per Train", y = "Frequency") + theme_minimal()
 }
 
+# Bar chart: Total passenger load by line and period
 plot_line_period_profile <- function(df) {
   df %>% group_by(line, period) %>% summarise(flow = sum(passenger_flow), .groups = "drop") %>%
     enforce_factors(c("line", "period")) %>%
@@ -55,6 +61,7 @@ plot_line_period_profile <- function(df) {
          x = "Period", y = "Flow", fill = "Tube Line") + theme_minimal()
 }
 
+# Histogram: Station-level crowding ratios (entries divided by exits)
 plot_station_crowding <- function(df) {
   df %>% mutate(crowding_ratio = total_entries / total_exits) %>%
     ggplot(aes(x = crowding_ratio)) +
@@ -63,6 +70,7 @@ plot_station_crowding <- function(df) {
          x = "Crowding Ratio", y = "Stations") + theme_minimal()
 }
 
+# Bar chart: Average passengers per train for each Tube line
 plot_avg_ppt_by_line <- function(df) {
   df %>% group_by(line) %>%
     summarise(avg_ppt = mean(passengers_per_train, na.rm = TRUE)) %>%
@@ -73,6 +81,7 @@ plot_avg_ppt_by_line <- function(df) {
          x = "Line", y = "Avg Passengers per Train") + theme_minimal()
 }
 
+# Bar plot: Top 5 OD pairs per time period
 plot_top5_od_per_period <- function(df) {
   drop_total_periods(df) %>%
     group_by(period, from_station, to_station) %>%
@@ -87,9 +96,7 @@ plot_top5_od_per_period <- function(df) {
 }
 
 
-
-
-# Matrix plot:  passenger load by line and period, for all days
+# Matrix bar plot: Line-period passenger load across days
 plot_line_period_by_day_matrix <- function(df) {
   df %>%
     filter(period %in% NOPERIOD) %>%
@@ -100,14 +107,13 @@ plot_line_period_by_day_matrix <- function(df) {
     geom_col(position = "dodge") +
     ggh4x::facet_wrap2(~ day, ncol = 3, scales = "fixed", axes = "all") +
     scale_fill_manual(values = tube_line_colors, drop = FALSE) +
-    labs(title = "Passenger Load by Line & Period (All Days)",
+    labs(title = "Passenger Load by Line & Period (2023)",
          x = "Period", y = "Flow", fill = "Tube Line") + theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1),
           panel.spacing.y = unit(1.5, "lines"))
 }
 
-
-# Matrix plot: passenger load by line and period, for TWT of different years
+# Matrix of bar plot: Line-period passenger load across years for TWT
 plot_line_period_by_year_matrix <- function(df) {
   df %>%
     filter(period %in% NOPERIOD) %>%
@@ -118,15 +124,14 @@ plot_line_period_by_year_matrix <- function(df) {
     geom_col(position = "dodge") +
     ggh4x::facet_wrap2(~ year, ncol = 3, scales = "fixed", axes = "all") +
     scale_fill_manual(values = tube_line_colors, drop = FALSE) +
-    labs(title = "Passenger Load by Line & Period (Across Years)",
+    labs(title = "Passenger Load by Line & Period (2016 - 2023)",
          x = "Period", y = "Flow", fill = "Tube Line") + theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1),
           panel.spacing.y = unit(1.5, "lines"))
 }
 
 
-
-# Compare total demand by period
+# Compare total passenger demand across periods
 plot_demand_by_period_all_years <- function(df) {
   df %>%
     group_by(year, period) %>%
@@ -135,13 +140,13 @@ plot_demand_by_period_all_years <- function(df) {
     ggplot(aes(x = period, y = total_flow, fill = factor(year))) +
     geom_col(position = "dodge") +
     scale_fill_brewer(palette = "Set1") + 
-    labs(title = "Total Passenger Flow by Period (All Years)",
+    labs(title = "Total Passenger Flow by Period (TWT and MTT)",
          x = "Period", y = "Total Flow", fill = "Year") +
     theme_minimal()
 }
 
 
-# Compare total demand by line
+# Compare total passenger demand by Tube line across different years
 plot_demand_by_line_all_years <- function(df) {
   df %>%
     group_by(year, line) %>%
@@ -150,7 +155,7 @@ plot_demand_by_line_all_years <- function(df) {
     ggplot(aes(x = reorder(line, total_flow), y = total_flow, fill = factor(year))) +
     geom_col(position = "dodge") + coord_flip() +
     scale_fill_brewer(palette = "Set1") + 
-    labs(title = "Total Passenger Flow by Line (All Years)",
+    labs(title = "Total Passenger Flow by Line (TWT and MTT)",
          x = "Line", y = "Total Flow", fill = "Year") +
     theme_minimal()
 }

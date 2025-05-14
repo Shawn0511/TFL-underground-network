@@ -1,4 +1,4 @@
-# network visualization
+# network visualisation
 library(ggraph)
 library(tidygraph)
 library(dplyr)

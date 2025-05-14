@@ -1,6 +1,6 @@
 # Configuration: paths, libraries, parameters, palette
 
-# core libraries
+# core libraries needed
 library(here)
 library(readxl)
 library(dplyr)
@@ -25,13 +25,18 @@ years        <- year_folders %>% str_remove("^NUMBAT ") %>% as.integer()
 # Day labels & period levels
 DAYS     <- c("TWT","MON","FRI","SAT","SUN")
 PERIODS  <- c("total","early","am_peak","midday","pm_peak","evening","late")
+
+# Pre-computed grids
 NOPERIOD <- PERIODS[PERIODS != "total"]
+# helper function for qhr
+QHR_COLUMNS <- function(df) grep("^x\\d{1,2}$", names(df), value = TRUE)
+
 
 # helper to build each Excel path
 make_nbt_path <- function(year, day) {
   year_folder <- paste("NUMBAT", year)
-  file_name   <- sprintf("NBT%02d%s_outputs.xlsx", year %% 100, day)
-  here("Data","Raw","NUMBAT", year_folder, file_name)
+  file_name <- sprintf("NBT%02d%s_outputs.xlsx", year %% 100, day)
+  here("Data", "Raw", "NUMBAT", year_folder, file_name)
 }
 
 # Resolve day of TWT and MTT (TWT -> MTT)
@@ -67,17 +72,25 @@ tube_line_colors <- c(
   `Waterloo & City`      = "#95CDBA"
 )
 
-# Pre-computed grids
-NOPERIOD <- PERIODS[PERIODS != "total"]
+FULL_DAY_GRID <- expand_grid(line = names(tube_line_colors), period = NOPERIOD, day = DAYS)
+FULL_YEAR_GRID <- function(years) expand_grid(year = years, line = names(tube_line_colors), period = NOPERIOD)
 
-FULL_DAY_GRID <- expand_grid(
-  line   = names(tube_line_colors),
-  period = NOPERIOD,
-  day    = DAYS
+
+#  seats_per_train = full-load capacity (seats + standing @ 6 pax/m²)
+#  sources: TFL Rolling-stock Data Sheet 4th Ed. & Class 345 FOI docs
+# But some of them are approximated and roughly estimated
+SEATS_PER_TRAIN <- c(
+  Bakerloo          = 876,
+  Central           = 876,
+  DLR               = 550,         
+  District          = 1008,       
+  "Elizabeth Line"  = 1500,
+  "H&C and Circle"  = 1008,        
+  Jubilee           = 1048,
+  Metropolitan      = 1276,       
+  Northern          = 952,
+  Piccadilly        = 986,
+  Victoria          = 950,
+  "Waterloo & City" = 600
 )
 
-FULL_YEAR_GRID <- function(years) expand_grid(
-  year   = years,
-  line   = names(tube_line_colors),
-  period = NOPERIOD
-)
