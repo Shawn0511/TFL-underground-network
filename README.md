@@ -17,7 +17,7 @@ The Full summary report of this project, with all visualisations and analysis:
 **[read the summary here »](Summary_report.md)**
 
 A one-page reflective summary is available in:
-[`summary/01382316-math70076-assessment-2-summary.pdf`](summary/01382316-math70076-assessment-2-summary.pdf)
+[`01382316-math70076-assessment-2-summary.pdf`](01382316-math70076-assessment-2-summary.pdf)
 
 For detailed results, see:
 [`Output/`](Output/) — all key plots and visualisations
