@@ -155,6 +155,6 @@ This project is released under the MIT License. (See 'LICENSE')
 For data access and reuse, consult TfL's [open data license](https://tfl.gov.uk/info-for/open-data-users/) and [crowding.data](https://crowding.data.tfl.gov.uk/).
 
 
-## Refrence
+## Reference
 
 Transport for London (TfL). (2023). Travel in London Report 15. Retrieved from: https://content.tfl.gov.uk/travel-in-london-report-15.pdf
